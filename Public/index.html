@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connexion WhatsApp</title>
+</head>
+<body>
+    <h1>Pairing WhatsApp</h1>
+    <p id="status">Chargement du QR Code...</p>
+    <div id="qrcode"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        socket.on('message', msg => {
+            document.getElementById('status').innerText = msg;
+        });
+
+        socket.on('qr', qrCodeDataUrl => {
+            const qrDiv = document.getElementById('qrcode');
+            qrDiv.innerHTML = '';
+            const img = document.createElement('img');
+            img.src = qrCodeDataUrl;
+            qrDiv.appendChild(img);
+        });
+    </script>
+</body>
+</html>
