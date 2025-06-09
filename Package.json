@@ -1,0 +1,14 @@
+{
+  "name": "whatsapp-pairing-site",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.x",
+    "socket.io": "^4.x",
+    "whatsapp-web.js": "^1.x",
+    "qrcode": "^1.x"
+  }
+}
