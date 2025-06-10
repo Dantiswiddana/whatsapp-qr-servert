@@ -1,28 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Connexion WhatsApp</title>
+  <meta charset="UTF-8">
+  <title>Connexion WhatsApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #25D366, #075E54);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background-color: #ffffff11;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    #status {
+      font-size: 1em;
+      margin-bottom: 20px;
+      color: #ffffffcc;
+    }
+
+    #qrcode img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 4px solid #fff;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 0.8em;
+      color: #ffffff99;
+    }
+  </style>
 </head>
 <body>
-    <h1>Pairing WhatsApp</h1>
+  <div class="container">
+    <h1>Connexion WhatsApp</h1>
     <p id="status">Chargement du QR Code...</p>
     <div id="qrcode"></div>
+    <footer>
+      &copy; 2025 - WhatsApp QR Pairing
+    </footer>
+  </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        const socket = io();
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
 
-        socket.on('message', msg => {
-            document.getElementById('status').innerText = msg;
-        });
+    socket.on('message', msg => {
+      document.getElementById('status').innerText = msg;
+    });
 
-        socket.on('qr', qrCodeDataUrl => {
-            const qrDiv = document.getElementById('qrcode');
-            qrDiv.innerHTML = '';
-            const img = document.createElement('img');
-            img.src = qrCodeDataUrl;
-            qrDiv.appendChild(img);
-        });
-    </script>
+    socket.on('qr', qrCodeDataUrl => {
+      const qrDiv = document.getElementById('qrcode');
+      qrDiv.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = qrCodeDataUrl;
+      qrDiv.appendChild(img);
+    });
+  </script>
 </body>
 </html>
